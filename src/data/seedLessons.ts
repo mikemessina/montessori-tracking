@@ -1,0 +1,87 @@
+import type { LessonArea, Lesson } from "../types";
+
+// Starter curriculum: a representative (non-exhaustive) set of classic
+// Montessori Primary (3-6) works, grouped by area. Teachers can add,
+// edit, reorder, or remove lessons later via the catalog management screen.
+
+export const seedLessonAreas: Omit<LessonArea, "id">[] = [
+  { name: "Practical Life", order: 1 },
+  { name: "Sensorial", order: 2 },
+  { name: "Language", order: 3 },
+  { name: "Mathematics", order: 4 },
+  { name: "Cultural", order: 5 },
+];
+
+// Keyed by area name so the seeding script can resolve the generated area id.
+export const seedLessonsByArea: Record<string, Omit<Lesson, "id" | "areaId">[]> = {
+  "Practical Life": [
+    { name: "Pouring (dry)", order: 1 },
+    { name: "Pouring (liquid)", order: 2 },
+    { name: "Spooning", order: 3 },
+    { name: "Tonging/Transferring", order: 4 },
+    { name: "Using a Spoon", order: 5 },
+    { name: "Folding Cloths", order: 6 },
+    { name: "Dressing Frames: Buttons", order: 7 },
+    { name: "Dressing Frames: Zipper", order: 8 },
+    { name: "Dressing Frames: Buckle", order: 9 },
+    { name: "Hand Washing", order: 10 },
+    { name: "Table Washing", order: 11 },
+    { name: "Sweeping", order: 12 },
+    { name: "Polishing (shoes/metal)", order: 13 },
+    { name: "Flower Arranging", order: 14 },
+    { name: "Food Preparation: Cutting", order: 15 },
+    { name: "Care of Plants", order: 16 },
+    { name: "Grace and Courtesy", order: 17 },
+  ],
+  Sensorial: [
+    { name: "Pink Tower", order: 1 },
+    { name: "Brown Stair", order: 2 },
+    { name: "Red Rods", order: 3 },
+    { name: "Knobbed Cylinders", order: 4 },
+    { name: "Color Tablets (Box 1)", order: 5 },
+    { name: "Color Tablets (Box 2)", order: 6 },
+    { name: "Color Tablets (Box 3)", order: 7 },
+    { name: "Geometric Solids", order: 8 },
+    { name: "Sound Cylinders", order: 9 },
+    { name: "Rough and Smooth Boards", order: 10 },
+    { name: "Fabric Box", order: 11 },
+    { name: "Baric Tablets", order: 12 },
+    { name: "Smelling Bottles", order: 13 },
+    { name: "Tasting Bottles", order: 14 },
+    { name: "Constructive Triangles", order: 15 },
+  ],
+  Language: [
+    { name: "Sandpaper Letters", order: 1 },
+    { name: "Sand Tray (letter tracing)", order: 2 },
+    { name: "Moveable Alphabet", order: 3 },
+    { name: "I Spy (phonemic awareness)", order: 4 },
+    { name: "Object Boxes (CVC words)", order: 5 },
+    { name: "Metal Insets", order: 6 },
+    { name: "Phonogram Sounds", order: 7 },
+    { name: "Beginning Reading Booklets", order: 8 },
+    { name: "Handwriting Practice", order: 9 },
+  ],
+  Mathematics: [
+    { name: "Number Rods", order: 1 },
+    { name: "Sandpaper Numerals", order: 2 },
+    { name: "Spindle Box", order: 3 },
+    { name: "Cards and Counters", order: 4 },
+    { name: "Golden Beads: Introduction", order: 5 },
+    { name: "Golden Beads: Bank Game", order: 6 },
+    { name: "Teen Boards", order: 7 },
+    { name: "Ten Boards", order: 8 },
+    { name: "Hundred Board", order: 9 },
+    { name: "Addition with Golden Beads", order: 10 },
+  ],
+  Cultural: [
+    { name: "Land and Water Forms", order: 1 },
+    { name: "Puzzle Map: World", order: 2 },
+    { name: "Puzzle Map: Continent", order: 3 },
+    { name: "Flags", order: 4 },
+    { name: "Parts of a Plant", order: 5 },
+    { name: "Parts of an Animal", order: 6 },
+    { name: "Life Cycles", order: 7 },
+    { name: "Days of the Week / Calendar", order: 8 },
+    { name: "Seasons", order: 9 },
+  ],
+};
