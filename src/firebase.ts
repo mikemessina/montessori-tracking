@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
 import {
+  browserLocalPersistence,
+  getAuth,
+  setPersistence,
+} from "firebase/auth";
+import {
   initializeFirestore,
   persistentLocalCache,
   persistentMultipleTabManager,
@@ -19,6 +24,8 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const authPersistenceReady = setPersistence(auth, browserLocalPersistence);
 
 // Persistent local cache enables full offline read/write support: changes
 // made with no network connection are queued and synced automatically

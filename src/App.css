@@ -408,3 +408,85 @@ a.btn-secondary {
   margin-bottom: 16px;
   line-height: 1.5;
 }
+
+/* --- Authentication --- */
+
+.app-loading,
+.login-page {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.app-loading {
+  color: var(--text);
+}
+
+.login-page {
+  background: var(--code-bg);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  box-sizing: border-box;
+}
+
+.login-card h1 {
+  font-size: 30px;
+  margin: 12px 0 6px;
+  text-align: center;
+}
+
+.login-card > p {
+  margin-bottom: 24px;
+  text-align: center;
+  color: var(--text);
+}
+
+.login-card .btn-primary {
+  width: 100%;
+}
+
+.login-mark {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.btn-link {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.form-error {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #b91c1c;
+  text-align: left !important;
+  font-size: 14px;
+}

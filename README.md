@@ -1,32 +1,58 @@
-# React + TypeScript + Vite
+# Montessori Tracking
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An offline-capable classroom progress tracker for Montessori teachers. The app
+tracks children, curriculum areas, lessons, lesson status history, observations,
+and the teacher who recorded each update.
 
-Currently, two official plugins are available:
+## Technology
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React, TypeScript, and Vite
+- Firebase Authentication (email/password)
+- Cloud Firestore with persistent offline cache and real-time synchronization
+- Vitest and Oxlint
 
-## React Compiler
+## Local setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Install dependencies:
 
-## Expanding the Oxlint configuration
+   ```powershell
+   npm install
+   ```
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+2. Copy `.env.example` to `.env.local` and enter the Firebase web app config.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+3. In Firebase Console, enable **Authentication > Sign-in method >
+   Email/Password**.
+
+4. Create teacher accounts under **Authentication > Users**. Public account
+   creation is intentionally not exposed by the app.
+
+5. Publish `firestore.rules` through **Firestore Database > Rules**.
+
+6. Start the app:
+
+   ```powershell
+   npm run dev
+   ```
+
+## Validation
+
+```powershell
+npm run build
+npm run lint
+npm test
+node scripts/verify-firestore.mjs
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+The Firestore verification script confirms that unauthenticated requests are
+rejected by the deployed rules.
+
+## Teacher access
+
+All authenticated teacher accounts currently share the same classroom data.
+To add or remove a teacher, manage users in Firebase Console. Firestore access
+is denied to signed-out users.
+
+Because the app supports offline use, Firestore caches classroom data on the
+device. Use only school-controlled or otherwise trusted devices, and protect
+each device with a passcode.

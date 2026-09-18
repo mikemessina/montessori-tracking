@@ -1,10 +1,14 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { useAuth } from "../auth/useAuth";
 import { useChildren } from "../hooks/useCollections";
 import { ChildCard } from "../components/ChildCard";
 import { AddChildModal } from "../components/AddChildModal";
+import { auth } from "../firebase";
 
 export function RosterPage() {
+  const { user } = useAuth();
   const children = useChildren();
   const [showAdd, setShowAdd] = useState(false);
   const [search, setSearch] = useState("");
@@ -32,6 +36,9 @@ export function RosterPage() {
           <Link to="/catalog" className="btn-secondary">
             Lesson Catalog
           </Link>
+          <button className="btn-secondary" onClick={() => signOut(auth)}>
+            Sign Out{user?.email ? ` (${user.email})` : ""}
+          </button>
           <button className="btn-primary" onClick={() => setShowAdd(true)}>
             + Add Child
           </button>
