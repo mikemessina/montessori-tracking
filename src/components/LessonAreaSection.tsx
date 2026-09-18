@@ -10,6 +10,14 @@ interface Props {
   recordsByLessonId: Map<string, ChildLessonRecord>;
 }
 
+/** Date of the most recent observation entry, i.e. when the current status was set. */
+function latestObservationDate(record: ChildLessonRecord | undefined): string | undefined {
+  if (!record || record.history.length === 0) return undefined;
+  return record.history.reduce((latest, entry) =>
+    entry.date > latest.date ? entry : latest
+  ).date;
+}
+
 export function LessonAreaSection({ childId, area, lessons, recordsByLessonId }: Props) {
   const [expanded, setExpanded] = useState(true);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
@@ -32,6 +40,7 @@ export function LessonAreaSection({ childId, area, lessons, recordsByLessonId }:
           {lessons.map((lesson) => {
             const record = recordsByLessonId.get(lesson.id);
             const status = record?.currentStatus ?? "Not Introduced";
+            const lastDate = latestObservationDate(record);
             return (
               <li key={lesson.id}>
                 <button
@@ -39,6 +48,7 @@ export function LessonAreaSection({ childId, area, lessons, recordsByLessonId }:
                   onClick={() => setActiveLesson(lesson)}
                 >
                   <span className="lesson-name">{lesson.name}</span>
+                  {lastDate && <span className="lesson-date">{lastDate}</span>}
                   <span className={`status-badge ${statusClass(status)}`}>
                     {status}
                   </span>
