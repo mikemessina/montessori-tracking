@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { seedCurriculumIfEmpty } from "./data/seedCurriculum";
 import { RosterPage } from "./pages/RosterPage";
 import { ChildDetailPage } from "./pages/ChildDetailPage";
+import { CatalogPage } from "./pages/CatalogPage";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<RosterPage />} />
         <Route path="/child/:childId" element={<ChildDetailPage />} />
+        <Route path="/catalog" element={<CatalogPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -301,3 +301,103 @@ label {
   font-size: 14px;
   color: var(--text);
 }
+
+/* --- Catalog management --- */
+
+a.btn-secondary {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.catalog-area-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--code-bg);
+  padding: 12px 18px;
+}
+
+.catalog-area-name {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.catalog-lesson-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  border-top: 1px solid var(--border);
+}
+
+.reorder-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reorder-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+}
+
+.reorder-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.empty-state-inline {
+  padding: 14px 18px;
+  color: var(--text);
+  font-size: 15px;
+  border-top: 1px solid var(--border);
+}
+
+.btn-danger {
+  font-size: 17px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  min-height: 44px;
+  background: #dc2626;
+  color: white;
+  font-weight: 600;
+}
+
+.btn-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-danger-text {
+  background: none;
+  border: none;
+  color: #dc2626;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.modal-actions-split {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-confirm p {
+  color: var(--text-h);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}

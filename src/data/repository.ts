@@ -3,12 +3,14 @@ import {
   arrayUnion,
   collection,
   doc,
+  getDocs,
   onSnapshot,
   orderBy,
   query,
   setDoc,
   updateDoc,
   where,
+  writeBatch,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import type {
@@ -85,9 +87,69 @@ export async function addLessonArea(area: Omit<LessonArea, "id">): Promise<strin
   return ref.id;
 }
 
+export async function updateLessonArea(
+  areaId: string,
+  updates: Partial<Omit<LessonArea, "id">>
+): Promise<void> {
+  await updateDoc(doc(db, AREAS, areaId), updates);
+}
+
+/** Deletes a lesson area and all lessons within it (and their child records). */
+export async function deleteLessonArea(areaId: string): Promise<void> {
+  const lessonsSnap = await getDocs(
+    query(collection(db, LESSONS), where("areaId", "==", areaId))
+  );
+  const batch = writeBatch(db);
+  for (const lessonDoc of lessonsSnap.docs) {
+    batch.delete(lessonDoc.ref);
+  }
+  batch.delete(doc(db, AREAS, areaId));
+  await batch.commit();
+}
+
+/** Persists a new relative order for a list of lesson areas. */
+export async function reorderLessonAreas(
+  orderedAreaIds: string[]
+): Promise<void> {
+  const batch = writeBatch(db);
+  orderedAreaIds.forEach((areaId, index) => {
+    batch.update(doc(db, AREAS, areaId), { order: index + 1 });
+  });
+  await batch.commit();
+}
+
 export async function addLesson(lesson: Omit<Lesson, "id">): Promise<string> {
   const ref = await addDoc(collection(db, LESSONS), lesson);
   return ref.id;
+}
+
+export async function updateLesson(
+  lessonId: string,
+  updates: Partial<Omit<Lesson, "id">>
+): Promise<void> {
+  await updateDoc(doc(db, LESSONS, lessonId), updates);
+}
+
+/** Deletes a lesson and any child progress records tied to it. */
+export async function deleteLesson(lessonId: string): Promise<void> {
+  const recordsSnap = await getDocs(
+    query(collection(db, RECORDS), where("lessonId", "==", lessonId))
+  );
+  const batch = writeBatch(db);
+  for (const recordDoc of recordsSnap.docs) {
+    batch.delete(recordDoc.ref);
+  }
+  batch.delete(doc(db, LESSONS, lessonId));
+  await batch.commit();
+}
+
+/** Persists a new relative order for a list of lessons (typically within one area). */
+export async function reorderLessons(orderedLessonIds: string[]): Promise<void> {
+  const batch = writeBatch(db);
+  orderedLessonIds.forEach((lessonId, index) => {
+    batch.update(doc(db, LESSONS, lessonId), { order: index + 1 });
+  });
+  await batch.commit();
 }
 
 /**

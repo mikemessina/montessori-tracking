@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { useChildren } from "../hooks/useCollections";
 import { ChildCard } from "../components/ChildCard";
 import { AddChildModal } from "../components/AddChildModal";
@@ -28,6 +29,9 @@ export function RosterPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
+          <Link to="/catalog" className="btn-secondary">
+            Lesson Catalog
+          </Link>
           <button className="btn-primary" onClick={() => setShowAdd(true)}>
             + Add Child
           </button>
